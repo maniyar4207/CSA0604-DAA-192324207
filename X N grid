@@ -1,0 +1,100 @@
+Skip to content
+Navigation Menu
+
+Cosmicsharmi
+/
+DAA-CSA0604
+
+
+
+
+Code
+Issues
+Pull requests
+Actions
+Projects
+Security
+Insights
+Commit
+Create X N grid
+Browse files
+ main
+@Cosmicsharmi
+Cosmicsharmi committed 3 hours ago 
+Verified
+1 parent 48f9cd4
+commit 8b40683
+Showing 1 changed file with 36 additions and 0 deletions.
+
+Whitespace
+
+Ignore whitespace
+
+Split
+
+Unified
+ 36 changes: 36 additions & 0 deletions36  
+X N grid
+Original file line number	Diff line number	Diff line change
+@@ -0,0 +1,36 @@
+def findPaths(m, n, N, i, j):
+    dp = [[[0] * (N + 1) for _ in range(n)] for _ in range(m)]
+    dp[i][j][0] = 1
+    MOD = 10**9 + 7
+    result = 0
+
+    for step in range(1, N + 1):
+        temp = [[[0] * (N + 1) for _ in range(n)] for _ in range(m)]
+        for x in range(m):
+            for y in range(n):
+                for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+                    nx, ny = x + dx, y + dy
+                    if 0 <= nx < m and 0 <= ny < n:
+                        temp[x][y][step] = (temp[x][y][step] + dp[nx][ny][step - 1]) % MOD
+                    else:
+                        result = (result + dp[x][y][step - 1]) % MOD
+        dp = temp
+
+    return result
+
+# Input and output examples:
+# Example 1
+m = 2
+n = 2
+N = 2
+i = 0
+j = 0
+print("Output:", findPaths(m, n, N, i, j))  # Output: 6
+
+# Example 2
+m = 1
+n = 3
+N = 3
+i = 0
+j = 1
+print("Output:", findPaths(m, n, N, i, j))  # Output: 12
+0 comments on commit 8b40683
+@Dhanashree-Selva
+Comment
+Write
+Preview
+
+ 
+Leave a comment
+Markdown is supported
+ 
+Paste, drop, or click to add files
+
+Comment on this commit
+Loading
+Footer
+© 2024 GitHub, Inc.
+Footer navigation
+Terms
+Privacy
+Security
+Status
+Docs
+Contact
+Manage cookies
+Do not share my personal information
